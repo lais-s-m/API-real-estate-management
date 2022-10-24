@@ -1,7 +1,6 @@
 import AppDataSource from "../../data-source";
 import User from "../../entities/user.entity";
-import { IUser } from "../../interfaces/user.interfaces";
-import { createUserSchemaResponse } from "../../schemas/user.schemas";
+import { IUser } from "../../interfaces/users";
 
 const listUsersService = async (): Promise<IUser[]> => {
   const userRespository = AppDataSource.getRepository(User);

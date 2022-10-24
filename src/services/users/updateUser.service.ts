@@ -1,7 +1,8 @@
 import AppDataSource from "../../data-source";
 import User from "../../entities/user.entity";
-import { IUserUpdate } from "../../interfaces/user.interfaces";
 import { hash } from "bcrypt";
+import { IUserUpdate } from "../../interfaces/users";
+import { AppError } from "../../errors/appError";
 
 const updateUserService = async (
   data: IUserUpdate,
@@ -21,7 +22,7 @@ const updateUserService = async (
   });
 
   if (!findUser) {
-    return ["User not found", 404];
+    throw new AppError("User not found", 404);
   }
   const keys = Object.keys(data);
   if (
@@ -29,7 +30,7 @@ const updateUserService = async (
     keys.includes("isAdm") ||
     keys.includes("isActive")
   ) {
-    return ["You can't update these values", 401];
+    throw new AppError("You can't update these values", 401);
   }
   await userRepository.update(id, {
     name: data.name ? data.name : findUser.name,

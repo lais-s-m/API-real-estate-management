@@ -1,9 +1,10 @@
 import { compare } from "bcrypt";
 import AppDataSource from "../../data-source";
 import User from "../../entities/user.entity";
-import { ISessionRequest } from "../../interfaces/session.interfaces";
 import jwt from "jsonwebtoken";
+import { ISessionRequest } from "../../interfaces/sessions";
 import "dotenv/config";
+import { AppError } from "../../errors/appError";
 
 const createSessionService = async ({
   email,
@@ -15,12 +16,12 @@ const createSessionService = async ({
     email: email,
   });
   if (!user) {
-    throw new Error("Invalid email or password");
+    throw new AppError("Invalid email or password", 401);
   }
 
   const passwordMatch = await compare(password, user.password);
   if (!passwordMatch) {
-    throw new Error("Invalid email or password");
+    throw new AppError("Invalid email or password", 401);
   }
 
   const token = jwt.sign(

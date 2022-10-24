@@ -1,8 +1,8 @@
 import AppDataSource from "../../data-source";
 import User from "../../entities/user.entity";
-import { IUser, IUserRequest } from "../../interfaces/user.interfaces";
 import { hash } from "bcrypt";
 import { createUserSchemaResponse } from "../../schemas/user.schemas";
+import { IUser, IUserRequest } from "../../interfaces/users";
 
 const createUserService = async ({
   name,
