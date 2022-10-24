@@ -16,12 +16,12 @@ const createSessionService = async ({
     email: email,
   });
   if (!user) {
-    throw new AppError("Invalid email or password", 401);
+    throw new AppError("Invalid email or password", 403);
   }
 
   const passwordMatch = await compare(password, user.password);
   if (!passwordMatch) {
-    throw new AppError("Invalid email or password", 401);
+    throw new AppError("Invalid email or password", 403);
   }
 
   const token = jwt.sign(

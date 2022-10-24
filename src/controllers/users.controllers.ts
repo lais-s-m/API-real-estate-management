@@ -10,7 +10,7 @@ import updateUserService from "../services/users/updateUser.service";
 export const createUserController = async (req: Request, res: Response) => {
   const user: IUserRequest = req.body;
   const createdUser = await createUserService(user);
-  return res.json(createdUser);
+  return res.status(201).json(createdUser);
 };
 
 //Read

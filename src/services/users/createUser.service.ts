@@ -3,6 +3,7 @@ import User from "../../entities/user.entity";
 import { hash } from "bcrypt";
 import { createUserSchemaResponse } from "../../schemas/user.schemas";
 import { IUser, IUserRequest } from "../../interfaces/users";
+import { AppError } from "../../errors/appError";
 
 const createUserService = async ({
   name,
@@ -11,6 +12,17 @@ const createUserService = async ({
   password,
 }: IUserRequest): Promise<IUser> => {
   const userRepository = AppDataSource.getRepository(User);
+
+  const emailAlreadyExists = await userRepository.findOneBy({
+    email,
+  });
+
+  if (emailAlreadyExists) {
+    throw new AppError(
+      "There is already an account with this email address",
+      400
+    );
+  }
 
   const hashedPassword = await hash(password, 10);
 

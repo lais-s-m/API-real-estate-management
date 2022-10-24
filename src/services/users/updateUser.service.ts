@@ -12,7 +12,7 @@ const updateUserService = async (
 ): Promise<User | Array<string | number>> => {
   if (!isAdm) {
     if (userId !== id) {
-      return ["Unauthorized", 401];
+      throw new AppError("Unauthorized", 401);
     }
   }
   const userRepository = AppDataSource.getRepository(User);
