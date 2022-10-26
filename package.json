@@ -5,7 +5,7 @@
   "author": "Felipe <felipe.silva@kenzie.com.br>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
+    "dev": "ts-node-dev --ignore-watch node_modules src/app.ts",
     "build": "tsc",
     "typeorm": "typeorm-ts-node-commonjs",
     "test": "cross-env NODE_ENV=test SECRET_KEY=secret_key jest"
@@ -33,7 +33,7 @@
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.6",
+    "typeorm": "^0.3.10",
     "yup": "^0.32.11"
   }
 }
