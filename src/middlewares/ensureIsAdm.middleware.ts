@@ -1,31 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-
-const errorGETmethod = [
-  "Unauthorized. You must have administrator permissions to list users.",
-  403,
-];
-const errorDELETEmethod = [
-  "Unauthorized. You must have administrator permissions to delete users.",
-  403,
-];
-const errorPATCHmethod = [
-  "Unauthorized. You must have administrator permissions to update other users.",
-  401,
-];
-
-const ensureIsAdm = (
-  isAdm: boolean,
-  answer: (string | number)[],
-  next: NextFunction,
-  res: Response
-) => {
-  if (!isAdm) {
-    return res.status(answer[1] as number).json({
-      message: answer[0],
-    });
-  }
-  next();
-};
+import { AppError } from "../errors/appError";
 
 const ensureIsAdmMiddleware = (
   req: Request,
@@ -35,12 +9,14 @@ const ensureIsAdmMiddleware = (
   const isAdm = req.user.isAdm;
   const method = req.method;
 
-  if (method === "GET") {
-    ensureIsAdm(isAdm, errorGETmethod, next, res);
+  if (!isAdm) {
+    throw new AppError(
+      "You must have administrator permissons to execute this action",
+      403
+    );
   }
-  if (method === "DELETE") {
-    ensureIsAdm(isAdm, errorDELETEmethod, next, res);
-  }
+
+  return next();
 };
 
 export default ensureIsAdmMiddleware;

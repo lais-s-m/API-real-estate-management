@@ -29,7 +29,7 @@ const ensureAuthMiddleware = (
       id: decoded.sub,
     };
 
-    next();
+    return next();
   });
 };
 

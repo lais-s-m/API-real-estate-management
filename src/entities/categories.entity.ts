@@ -9,7 +9,7 @@ class Categories {
   @Column({ nullable: true })
   name: string;
 
-  @OneToMany(() => Properties, (property) => property.category)
+  @OneToMany(() => Properties, (properties) => properties.category)
   properties: Properties[];
 }
 
