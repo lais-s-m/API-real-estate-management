@@ -2,7 +2,7 @@
   "name": "API - real estate management",
   "version": "1.0.0",
   "main": "index.ts",
-  "author": "Laís <lais.bomtempo.sm@gmail.com>",
+  "author": "Lais <lais.bomtempo.sm@gmail.com>",
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
