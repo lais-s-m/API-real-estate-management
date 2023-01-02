@@ -15,3 +15,10 @@ export interface ISchedule {
   property: IProperty;
   user: IUser;
 }
+
+export interface IScheduleUpdate {
+  userId?: string;
+  propertyId?: string;
+  date?: string;
+  hour?: string;
+}
